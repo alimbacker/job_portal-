@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TalentBridge — Where Careers Connect</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #0f0e0c;
+    --ink-light: #3d3b35;
+    --ink-muted: #7a7568;
+    --cream: #f5f2ec;
+    --warm-white: #faf9f6;
+    --accent: #c8501a;
+    --accent-light: #f2e0d5;
+    --accent-dark: #8c3410;
+    --teal: #1a5c5a;
+    --teal-light: #d0eae9;
+    --gold: #b8860b;
+    --gold-light: #fef3cc;
+    --border: rgba(15,14,12,0.12);
+    --border-strong: rgba(15,14,12,0.25);
+    --shadow-sm: 0 1px 3px rgba(15,14,12,0.08), 0 1px 2px rgba(15,14,12,0.06);
+    --shadow-md: 0 4px 16px rgba(15,14,12,0.10), 0 2px 6px rgba(15,14,12,0.06);
+    --shadow-lg: 0 16px 40px rgba(15,14,12,0.12), 0 4px 12px rgba(15,14,12,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(250,249,246,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .nav-logo .dot { color: var(--accent); }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none; color: var(--ink-light);
+    font-size: 14px; font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-ctas { display: flex; align-items: center; gap: 12px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 22px; border-radius: 6px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.2s; border: 1.5px solid transparent;
+  }
+
+  .btn-ghost {
+    background: transparent; color: var(--ink-light);
+    border-color: var(--border-strong);
+  }
+  .btn-ghost:hover { background: var(--cream); color: var(--ink); }
+
+  .btn-primary {
+    background: var(--accent); color: white;
+    border-color: var(--accent);
+  }
+  .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+
+  .btn-outline-teal {
+    background: transparent; color: var(--teal);
+    border-color: var(--teal);
+  }
+  .btn-outline-teal:hover { background: var(--teal); color: white; }
+
+  .btn-lg { padding: 14px 32px; font-size: 15px; border-radius: 8px; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 100px 5vw 60px;
+    gap: 60px;
+    background: var(--warm-white);
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 45%; height: 100%;
+    background: var(--cream);
+    z-index: 0;
+  }
+
+  .hero-left { position: relative; z-index: 1; }
+  .hero-right { position: relative; z-index: 1; }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-light); color: var(--accent-dark);
+    padding: 6px 14px; border-radius: 100px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 24px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 700; line-height: 1.1;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+
+  h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 17px; color: var(--ink-muted); line-height: 1.7;
+    max-width: 480px; margin-bottom: 36px; font-weight: 300;
+  }
+
+  .hero-search {
+    display: flex; gap: 0;
+    background: white; border: 1.5px solid var(--border-strong);
+    border-radius: 10px; overflow: hidden;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 32px;
+  }
+
+  .hero-search input {
+    flex: 1; padding: 14px 18px;
+    border: none; outline: none;
+    font-family: 'DM Sans', sans-serif; font-size: 15px;
+    color: var(--ink); background: transparent;
+  }
+
+  .hero-search input::placeholder { color: var(--ink-muted); }
+
+  .search-divider {
+    width: 1px; background: var(--border); margin: 10px 0;
+  }
+
+  .hero-search button {
+    background: var(--accent); color: white; border: none;
+    padding: 14px 24px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+    transition: background 0.2s;
+  }
+  .hero-search button:hover { background: var(--accent-dark); }
+
+  .hero-stats {
+    display: flex; gap: 32px;
+  }
+
+  .stat-item { }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700; color: var(--ink);
+    line-height: 1;
+  }
+  .stat-label { font-size: 13px; color: var(--ink-muted); margin-top: 2px; }
+
+  .stat-sep { width: 1px; background: var(--border); }
+
+  /* Hero right: floating cards */
+  .hero-cards { position: relative; height: 480px; }
+
+  .job-card {
+    background: white; border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 20px 22px;
+    box-shadow: var(--shadow-md);
+    position: absolute;
+    min-width: 280px;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .job-card:nth-child(2) { animation-delay: -2s; }
+  .job-card:nth-child(3) { animation-delay: -4s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .jc-1 { top: 30px; left: 0; z-index: 3; }
+  .jc-2 { top: 180px; right: 0; z-index: 2; }
+  .jc-3 { bottom: 20px; left: 30px; z-index: 1; }
+
+  .jc-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+
+  .company-logo {
+    width: 40px; height: 40px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px; flex-shrink: 0;
+  }
+
+  .logo-accent { background: var(--accent-light); color: var(--accent-dark); }
+  .logo-teal { background: var(--teal-light); color: var(--teal); }
+  .logo-gold { background: var(--gold-light); color: var(--gold); }
+
+  .jc-title { font-weight: 600; font-size: 14px; color: var(--ink); }
+  .jc-company { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+
+  .jc-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .tag {
+    padding: 4px 10px; border-radius: 100px;
+    font-size: 11px; font-weight: 500;
+  }
+  .tag-gray { background: var(--cream); color: var(--ink-light); }
+  .tag-accent { background: var(--accent-light); color: var(--accent-dark); }
+  .tag-teal { background: var(--teal-light); color: var(--teal); }
+
+  .jc-salary {
+    margin-top: 12px; padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .salary-amt { font-weight: 600; font-size: 14px; color: var(--ink); }
+  .apply-mini {
+    background: var(--accent); color: white;
+    padding: 5px 14px; border-radius: 6px;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    border: none;
+  }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 90px 5vw; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+
+  .section-tag.orange { color: var(--accent); }
+  .section-tag.teal { color: var(--teal); }
+  .section-tag.gold { color: var(--gold); }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 700; line-height: 1.15;
+    color: var(--ink); margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 16px; color: var(--ink-muted);
+    max-width: 540px; line-height: 1.7; font-weight: 300;
+  }
+
+  /* ── DUAL CTA BANNER ── */
+  .dual-cta {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; overflow: hidden;
+    border-radius: 16px; box-shadow: var(--shadow-lg);
+  }
+
+  .cta-panel {
+    padding: 64px 48px;
+    display: flex; flex-direction: column;
+    align-items: flex-start; gap: 20px;
+  }
+
+  .cta-seeker { background: var(--ink); }
+  .cta-hr { background: var(--teal); }
+
+  .cta-icon {
+    width: 52px; height: 52px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .cta-icon.orange { background: var(--accent); }
+  .cta-icon.light { background: rgba(255,255,255,0.15); }
+
+  .cta-icon svg { width: 26px; height: 26px; stroke: white; stroke-width: 1.8; fill: none; }
+
+  .cta-panel h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: white; line-height: 1.2;
+  }
+
+  .cta-panel p { font-size: 15px; color: rgba(255,255,255,0.65); font-weight: 300; line-height: 1.7; }
+
+  .cta-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .cta-list li {
+    font-size: 14px; color: rgba(255,255,255,0.75);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .cta-list li::before {
+    content: '✓'; width: 20px; height: 20px;
+    border-radius: 50%; background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: white; flex-shrink: 0;
+  }
+
+  .btn-white {
+    background: white; color: var(--ink);
+    border-color: white; font-weight: 600;
+  }
+  .btn-white:hover { background: var(--cream); }
+
+  .btn-white-outline {
+    background: transparent; color: white;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+  .btn-white-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+  /* ── HOW IT WORKS ── */
+  .how-it-works { background: var(--cream); }
+
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 40px; margin-top: 60px;
+    position: relative;
+  }
+
+  .steps-grid::before {
+    content: '';
+    position: absolute; top: 28px; left: 16%; right: 16%;
+    height: 1px; background: var(--border-strong);
+    z-index: 0;
+  }
+
+  .step { text-align: center; position: relative; z-index: 1; }
+
+  .step-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
+    margin: 0 auto 20px;
+  }
+
+  .step-num.orange { background: var(--accent); color: white; }
+  .step-num.teal { background: var(--teal); color: white; }
+  .step-num.gold { background: var(--gold); color: white; }
+
+  .step h4 {
+    font-size: 17px; font-weight: 600; margin-bottom: 10px; color: var(--ink);
+  }
+
+  .step p { font-size: 14px; color: var(--ink-muted); line-height: 1.7; }
+
+  /* ── JOBS LISTING PREVIEW ── */
+  .jobs-preview { background: var(--warm-white); }
+
+  .jobs-filter {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px;
+  }
+
+  .filter-btn {
+    padding: 8px 18px; border-radius: 100px;
+    border: 1.5px solid var(--border);
+    background: white; color: var(--ink-light);
+    font-size: 13px; font-weight: 500; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    border-color: var(--accent); color: var(--accent); background: var(--accent-light);
+  }
+
+  .jobs-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  .job-listing-card {
+    background: white; border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 24px;
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+
+  .job-listing-card:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .jl-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
+  .jl-logo-wrap { display: flex; align-items: center; gap: 12px; }
+  .jl-info h4 { font-size: 15px; font-weight: 600; color: var(--ink); }
+  .jl-info span { font-size: 13px; color: var(--ink-muted); }
+
+  .bookmark-btn {
+    background: none; border: none; cursor: pointer;
+    color: var(--ink-muted); padding: 4px;
+    transition: color 0.2s;
+  }
+  .bookmark-btn:hover { color: var(--accent); }
+
+  .jl-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+
+  .jl-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 14px; border-top: 1px solid var(--border);
+  }
+
+  .jl-salary { font-weight: 600; font-size: 15px; color: var(--ink); }
+  .jl-time { font-size: 12px; color: var(--ink-muted); }
+
+  /* ── COMPANIES ── */
+  .companies { background: var(--cream); }
+
+  .companies-marquee {
+    display: flex; gap: 40px; overflow: hidden;
+    margin-top: 40px;
+  }
+
+  .company-pill {
+    flex-shrink: 0;
+    padding: 12px 24px; border-radius: 8px;
+    background: white; border: 1px solid var(--border);
+    font-weight: 600; font-size: 14px; color: var(--ink-muted);
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .company-dot {
+    width: 28px; height: 28px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 11px;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--warm-white); }
+
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 60px;
+  }
+
+  .testimonial-card {
+    background: white; border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 28px;
+  }
+
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px; line-height: 1; color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .testimonial-text {
+    font-size: 14px; color: var(--ink-light); line-height: 1.75;
+    margin-bottom: 20px; font-weight: 300;
+  }
+
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+
+  .author-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px;
+  }
+
+  .author-name { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .author-role { font-size: 12px; color: var(--ink-muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,0.65);
+    padding: 64px 5vw 32px;
+  }
+
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px; margin-bottom: 48px;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; color: white;
+    margin-bottom: 16px;
+  }
+
+  .footer-logo .dot { color: var(--accent); }
+
+  .footer-desc { font-size: 14px; line-height: 1.7; max-width: 260px; }
+
+  .footer-col h5 {
+    font-size: 13px; font-weight: 600; color: white;
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .footer-col ul li a {
+    text-decoration: none; color: rgba(255,255,255,0.55);
+    font-size: 14px; transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: white; }
+
+  .footer-bottom {
+    padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 13px;
+  }
+
+  /* ── HR DASHBOARD PREVIEW ── */
+  .hr-section { background: var(--cream); }
+
+  .hr-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center; margin-top: 60px;
+  }
+
+  .hr-mockup {
+    background: white; border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .hr-mockup-header {
+    background: var(--ink); padding: 14px 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .dot-red { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
+  .dot-yellow { width: 10px; height: 10px; border-radius: 50%; background: #febc2e; }
+  .dot-green { width: 10px; height: 10px; border-radius: 50%; background: #28c840; }
+
+  .hr-mockup-body { padding: 20px; }
+
+  .hr-stat-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-bottom: 20px;
+  }
+
+  .hr-stat {
+    background: var(--cream); border-radius: 8px;
+    padding: 14px; text-align: center;
+  }
+
+  .hr-stat-num { font-size: 22px; font-weight: 700; color: var(--ink); font-family: 'Playfair Display', serif; }
+  .hr-stat-label { font-size: 11px; color: var(--ink-muted); margin-top: 2px; }
+
+  .hr-applicants { display: flex; flex-direction: column; gap: 8px; }
+
+  .applicant-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 8px;
+    background: var(--cream);
+  }
+
+  .applicant-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
+  }
+
+  .applicant-info { flex: 1; }
+  .applicant-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .applicant-role { font-size: 11px; color: var(--ink-muted); }
+
+  .status-badge {
+    padding: 3px 10px; border-radius: 100px;
+    font-size: 11px; font-weight: 600;
+  }
+
+  .status-new { background: var(--accent-light); color: var(--accent-dark); }
+  .status-review { background: var(--gold-light); color: var(--gold); }
+  .status-shortlisted { background: var(--teal-light); color: var(--teal); }
+
+  .hr-features { display: flex; flex-direction: column; gap: 28px; }
+
+  .hr-feature { display: flex; gap: 18px; align-items: flex-start; }
+
+  .hr-feature-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .hr-feature-icon svg {
+    width: 22px; height: 22px; stroke-width: 1.8; fill: none;
+  }
+
+  .fi-orange { background: var(--accent-light); }
+  .fi-orange svg { stroke: var(--accent); }
+  .fi-teal { background: var(--teal-light); }
+  .fi-teal svg { stroke: var(--teal); }
+  .fi-gold { background: var(--gold-light); }
+  .fi-gold svg { stroke: var(--gold); }
+
+  .hr-feature h4 { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .hr-feature p { font-size: 14px; color: var(--ink-muted); line-height: 1.65; font-weight: 300; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; padding-bottom: 40px; }
+    .hero::before { display: none; }
+    .hero-cards { height: 320px; }
+    .dual-cta { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .steps-grid::before { display: none; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .hr-layout { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">TalentBridge<span class="dot">.</span></a>
+  <ul class="nav-links">
+    <li><a href="#jobs">Browse Jobs</a></li>
+    <li><a href="#companies">Companies</a></li>
+    <li><a href="#how">How it Works</a></li>
+    <li><a href="#hr">For HR</a></li>
+  </ul>
+  <div class="nav-ctas">
+    <a href="#" class="btn btn-ghost">Sign In</a>
+    <a href="#" class="btn btn-primary">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-tag">India's Fastest Growing Job Portal</div>
+    <h1>Find Your <em>Dream</em><br>Career Today</h1>
+    <p class="hero-sub">Connecting ambitious professionals with companies that value talent. Over 50,000+ jobs across every industry.</p>
+
+    <div class="hero-search">
+      <input type="text" placeholder="Job title, skill, or company...">
+      <div class="search-divider"></div>
+      <input type="text" placeholder="City or Remote" style="max-width: 160px;">
+      <button>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Search
+      </button>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">52K+</div>
+        <div class="stat-label">Active Jobs</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="stat-num">8K+</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="stat-num">2M+</div>
+        <div class="stat-label">Job Seekers</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-cards">
+      <!-- Card 1 -->
+      <div class="job-card jc-1">
+        <div class="jc-header">
+          <div class="company-logo logo-accent">G</div>
+          <div>
+            <div class="jc-title">Senior Product Designer</div>
+            <div class="jc-company">Groww · Bangalore</div>
+          </div>
+        </div>
+        <div class="jc-tags">
+          <span class="tag tag-gray">Figma</span>
+          <span class="tag tag-gray">UX Research</span>
+          <span class="tag tag-accent">Remote</span>
+        </div>
+        <div class="jc-salary">
+          <span class="salary-amt">₹28–40 LPA</span>
+          <button class="apply-mini">Apply</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="job-card jc-2">
+        <div class="jc-header">
+          <div class="company-logo logo-teal">Z</div>
+          <div>
+            <div class="jc-title">Full-Stack Engineer</div>
+            <div class="jc-company">Zepto · Mumbai</div>
+          </div>
+        </div>
+        <div class="jc-tags">
+          <span class="tag tag-gray">React</span>
+          <span class="tag tag-gray">Node.js</span>
+          <span class="tag tag-teal">Hybrid</span>
+        </div>
+        <div class="jc-salary">
+          <span class="salary-amt">₹35–55 LPA</span>
+          <button class="apply-mini">Apply</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="job-card jc-3">
+        <div class="jc-header">
+          <div class="company-logo logo-gold">R</div>
+          <div>
+            <div class="jc-title">Marketing Manager</div>
+            <div class="jc-company">Razorpay · Pune</div>
+          </div>
+        </div>
+        <div class="jc-tags">
+          <span class="tag tag-gray">SEO</span>
+          <span class="tag tag-gray">B2B</span>
+          <span class="tag tag-accent">On-site</span>
+        </div>
+        <div class="jc-salary">
+          <span class="salary-amt">₹20–32 LPA</span>
+          <button class="apply-mini">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DUAL CTA -->
+<section style="padding: 60px 5vw;">
+  <div class="dual-cta">
+    <div class="cta-panel cta-seeker">
+      <div class="cta-icon orange">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <h3>For Job Seekers</h3>
+      <p>Build your profile once and let opportunities come to you. Access thousands of curated roles across top companies.</p>
+      <ul class="cta-list">
+        <li>AI-powered job match recommendations</li>
+        <li>One-click apply with saved resume</li>
+        <li>Real-time application tracking</li>
+        <li>Salary insights & career guidance</li>
+      </ul>
+      <a href="#" class="btn btn-white btn-lg">Create Free Profile →</a>
+    </div>
+    <div class="cta-panel cta-hr">
+      <div class="cta-icon light">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      </div>
+      <h3>For HR & Recruiters</h3>
+      <p>Post jobs and reach a massive pool of qualified candidates. Streamline your entire hiring pipeline in one place.</p>
+      <ul class="cta-list">
+        <li>Post unlimited job listings</li>
+        <li>Smart candidate filtering & scoring</li>
+        <li>Integrated interview scheduling</li>
+        <li>Analytics & hiring reports</li>
+      </ul>
+      <a href="#" class="btn btn-white-outline btn-lg">Start Hiring Today →</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how">
+  <div class="section-tag orange">Simple Process</div>
+  <h2>How TalentBridge Works</h2>
+  <p class="section-sub">From profile to placement in three straightforward steps — for both sides of hiring.</p>
+
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num orange">01</div>
+      <h4>Create Your Profile</h4>
+      <p>Build a rich profile with your experience, skills, and preferences. Upload your resume and let our AI fill in the details automatically.</p>
+    </div>
+    <div class="step">
+      <div class="step-num teal">02</div>
+      <h4>Discover & Apply</h4>
+      <p>Browse personalized job recommendations or let companies find you. Apply with one click using your saved profile and resume.</p>
+    </div>
+    <div class="step">
+      <div class="step-num gold">03</div>
+      <h4>Get Hired</h4>
+      <p>Track every application in real-time, schedule interviews, and negotiate your offer — all within TalentBridge.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JOBS PREVIEW -->
+<section class="jobs-preview" id="jobs">
+  <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 36px;">
+    <div>
+      <div class="section-tag orange">Latest Openings</div>
+      <h2>Trending Jobs</h2>
+    </div>
+    <a href="#" class="btn btn-ghost">View All 52,000+ Jobs →</a>
+  </div>
+
+  <div class="jobs-filter">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Technology</button>
+    <button class="filter-btn">Design</button>
+    <button class="filter-btn">Marketing</button>
+    <button class="filter-btn">Finance</button>
+    <button class="filter-btn">Remote</button>
+    <button class="filter-btn">Fresher</button>
+  </div>
+
+  <div class="jobs-grid">
+    <!-- Job 1 -->
+    <div class="job-listing-card">
+      <div class="jl-header">
+        <div class="jl-logo-wrap">
+          <div class="company-logo logo-accent" style="width:36px;height:36px;font-size:13px;">P</div>
+          <div class="jl-info">
+            <h4>Data Scientist</h4>
+            <span>PhonePe · Bangalore</span>
+          </div>
+        </div>
+        <button class="bookmark-btn" title="Save job">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </button>
+      </div>
+      <div class="jl-tags">
+        <span class="tag tag-gray">Python</span>
+        <span class="tag tag-gray">ML</span>
+        <span class="tag tag-gray">SQL</span>
+        <span class="tag tag-teal">Hybrid</span>
+      </div>
+      <div class="jl-footer">
+        <span class="jl-salary">₹30–50 LPA</span>
+        <span class="jl-time">Posted 2h ago</span>
+      </div>
+    </div>
+
+    <!-- Job 2 -->
+    <div class="job-listing-card">
+      <div class="jl-header">
+        <div class="jl-logo-wrap">
+          <div class="company-logo logo-teal" style="width:36px;height:36px;font-size:13px;">S</div>
+          <div class="jl-info">
+            <h4>iOS Developer</h4>
+            <span>Swiggy · Hyderabad</span>
+          </div>
+        </div>
+        <button class="bookmark-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </button>
+      </div>
+      <div class="jl-tags">
+        <span class="tag tag-gray">Swift</span>
+        <span class="tag tag-gray">Xcode</span>
+        <span class="tag tag-accent">Remote</span>
+      </div>
+      <div class="jl-footer">
+        <span class="jl-salary">₹25–40 LPA</span>
+        <span class="jl-time">Posted 5h ago</span>
+      </div>
+    </div>
+
+    <!-- Job 3 -->
+    <div class="job-listing-card">
+      <div class="jl-header">
+        <div class="jl-logo-wrap">
+          <div class="company-logo logo-gold" style="width:36px;height:36px;font-size:13px;">M</div>
+          <div class="jl-info">
+            <h4>DevOps Engineer</h4>
+            <span>Meesho · Chennai</span>
+          </div>
+        </div>
+        <button class="bookmark-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </button>
+      </div>
+      <div class="jl-tags">
+        <span class="tag tag-gray">AWS</span>
+        <span class="tag tag-gray">Kubernetes</span>
+        <span class="tag tag-gray">CI/CD</span>
+      </div>
+      <div class="jl-footer">
+        <span class="jl-salary">₹22–36 LPA</span>
+        <span class="jl-time">Posted 1d ago</span>
+      </div>
+    </div>
+
+    <!-- Job 4 -->
+    <div class="job-listing-card">
+      <div class="jl-header">
+        <div class="jl-logo-wrap">
+          <div class="company-logo logo-accent" style="width:36px;height:36px;font-size:13px;">C</div>
+          <div class="jl-info">
+            <h4>Content Strategist</h4>
+            <span>CRED · Bangalore</span>
+          </div>
+        </div>
+        <button class="bookmark-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </button>
+      </div>
+      <div class="jl-tags">
+        <span class="tag tag-gray">Copywriting</span>
+        <span class="tag tag-gray">SEO</span>
+        <span class="tag tag-teal">Hybrid</span>
+      </div>
+      <div class="jl-footer">
+        <span class="jl-salary">₹12–20 LPA</span>
+        <span class="jl-time">Posted 2d ago</span>
+      </div>
+    </div>
+
+    <!-- Job 5 -->
+    <div class="job-listing-card">
+      <div class="jl-header">
+        <div class="jl-logo-wrap">
+          <div class="company-logo logo-teal" style="width:36px;height:36px;font-size:13px;">N</div>
+          <div class="jl-info">
+            <h4>Product Manager</h4>
+            <span>Nykaa · Delhi</span>
+          </div>
+        </div>
+        <button class="bookmark-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </button>
+      </div>
+      <div class="jl-tags">
+        <span class="tag tag-gray">Agile</span>
+        <span class="tag tag-gray">Jira</span>
+        <span class="tag tag-gray">Analytics</span>
+      </div>
+      <div class="jl-footer">
+        <span class="jl-salary">₹32–50 LPA</span>
+        <span class="jl-time">Posted 3d ago</span>
+      </div>
+    </div>
+
+    <!-- Job 6 -->
+    <div class="job-listing-card">
+      <div class="jl-header">
+        <div class="jl-logo-wrap">
+          <div class="company-logo logo-gold" style="width:36px;height:36px;font-size:13px;">U</div>
+          <div class="jl-info">
+            <h4>UX Researcher</h4>
+            <span>Urban Company · Gurgaon</span>
+          </div>
+        </div>
+        <button class="bookmark-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </button>
+      </div>
+      <div class="jl-tags">
+        <span class="tag tag-gray">User Testing</span>
+        <span class="tag tag-gray">Interviews</span>
+        <span class="tag tag-accent">Remote</span>
+      </div>
+      <div class="jl-footer">
+        <span class="jl-salary">₹18–28 LPA</span>
+        <span class="jl-time">Posted 4d ago</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HR SECTION -->
+<section class="hr-section" id="hr">
+  <div class="section-tag teal">For Recruiters</div>
+  <h2>Your Hiring Command Center</h2>
+  <p class="section-sub">Everything your HR team needs to attract, evaluate, and hire top talent — in one elegant dashboard.</p>
+
+  <div class="hr-layout">
+    <!-- Mockup -->
+    <div class="hr-mockup">
+      <div class="hr-mockup-header">
+        <div class="dot-red"></div>
+        <div class="dot-yellow"></div>
+        <div class="dot-green"></div>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px;margin-left:10px;">HR Dashboard — TalentBridge</span>
+      </div>
+      <div class="hr-mockup-body">
+        <div class="hr-stat-row">
+          <div class="hr-stat">
+            <div class="hr-stat-num">247</div>
+            <div class="hr-stat-label">Applicants</div>
+          </div>
+          <div class="hr-stat">
+            <div class="hr-stat-num">12</div>
+            <div class="hr-stat-label">Active Jobs</div>
+          </div>
+          <div class="hr-stat">
+            <div class="hr-stat-num">8</div>
+            <div class="hr-stat-label">Interviews</div>
+          </div>
+        </div>
+
+        <div style="font-size:13px;font-weight:600;color:var(--ink-muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em;">Recent Applicants</div>
+
+        <div class="hr-applicants">
+          <div class="applicant-row">
+            <div class="applicant-avatar" style="background:var(--accent-light);color:var(--accent-dark);">AR</div>
+            <div class="applicant-info">
+              <div class="applicant-name">Aditya Rao</div>
+              <div class="applicant-role">Sr. Frontend Engineer</div>
+            </div>
+            <span class="status-badge status-new">New</span>
+          </div>
+          <div class="applicant-row">
+            <div class="applicant-avatar" style="background:var(--teal-light);color:var(--teal);">PK</div>
+            <div class="applicant-info">
+              <div class="applicant-name">Priya Kumar</div>
+              <div class="applicant-role">Product Manager</div>
+            </div>
+            <span class="status-badge status-review">In Review</span>
+          </div>
+          <div class="applicant-row">
+            <div class="applicant-avatar" style="background:var(--gold-light);color:var(--gold);">SM</div>
+            <div class="applicant-info">
+              <div class="applicant-name">Siddharth Mehta</div>
+              <div class="applicant-role">Data Analyst</div>
+            </div>
+            <span class="status-badge status-shortlisted">Shortlisted</span>
+          </div>
+          <div class="applicant-row">
+            <div class="applicant-avatar" style="background:var(--accent-light);color:var(--accent-dark);">DG</div>
+            <div class="applicant-info">
+              <div class="applicant-name">Divya Gupta</div>
+              <div class="applicant-role">UX Designer</div>
+            </div>
+            <span class="status-badge status-new">New</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="hr-features">
+      <div class="hr-feature">
+        <div class="hr-feature-icon fi-orange">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <h4>Smart Candidate Matching</h4>
+          <p>Our AI ranks applicants by fit score — skills, experience, and culture alignment — so your team reviews only the best candidates first.</p>
+        </div>
+      </div>
+      <div class="hr-feature">
+        <div class="hr-feature-icon fi-teal">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div>
+          <h4>Interview Scheduling</h4>
+          <p>Sync with Google Calendar and automatically schedule interviews with candidates, with built-in reminder emails and video links.</p>
+        </div>
+      </div>
+      <div class="hr-feature">
+        <div class="hr-feature-icon fi-gold">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div>
+          <h4>Hiring Analytics</h4>
+          <p>Track time-to-hire, cost-per-hire, and pipeline health with real-time dashboards your leadership team will love.</p>
+        </div>
+      </div>
+      <a href="#" class="btn btn-outline-teal btn-lg" style="align-self:flex-start;margin-top:8px;">Post a Job Free →</a>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANIES -->
+<section class="companies" id="companies">
+  <div style="text-align:center;">
+    <div class="section-tag gold" style="display:block;text-align:center;">Trusted By</div>
+    <h2>Join 8,000+ Companies Hiring on TalentBridge</h2>
+  </div>
+  <div class="companies-marquee" style="justify-content:center;flex-wrap:wrap;gap:16px;margin-top:40px;">
+    <div class="company-pill"><div class="company-dot" style="background:var(--accent-light);color:var(--accent-dark);">Z</div>Zepto</div>
+    <div class="company-pill"><div class="company-dot" style="background:var(--teal-light);color:var(--teal);">S</div>Swiggy</div>
+    <div class="company-pill"><div class="company-dot" style="background:var(--gold-light);color:var(--gold);">R</div>Razorpay</div>
+    <div class="company-pill"><div class="company-dot" style="background:var(--accent-light);color:var(--accent-dark);">P</div>PhonePe</div>
+    <div class="company-pill"><div class="company-dot" style="background:var(--teal-light);color:var(--teal);">C</div>CRED</div>
+    <div class="company-pill"><div class="company-dot" style="background:var(--gold-light);color:var(--gold);">G</div>Groww</div>
+    <div class="company-pill"><div class="company-dot" style="background:var(--accent-light);color:var(--accent-dark);">N</div>Nykaa</div>
+    <div class="company-pill"><div class="company-dot" style="background:var(--teal-light);color:var(--teal);">M</div>Meesho</div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-tag orange">Success Stories</div>
+  <h2>Careers Launched. Teams Built.</h2>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">I had been job hunting for 3 months with no luck. TalentBridge's AI matching connected me with a role I hadn't even thought to search for — and I got the offer in 2 weeks.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:var(--accent-light);color:var(--accent-dark);">AP</div>
+        <div>
+          <div class="author-name">Anjali Patel</div>
+          <div class="author-role">Product Designer · Bangalore</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">As a recruiter, I used to spend hours filtering CVs. TalentBridge's candidate scoring cuts that to minutes. We've reduced our time-to-hire by 40% this quarter.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:var(--teal-light);color:var(--teal);">RV</div>
+        <div>
+          <div class="author-name">Rahul Verma</div>
+          <div class="author-role">HR Manager · Zepto</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">Fresh out of college, I was intimidated. But TalentBridge showed me roles that matched my actual skills, not just my degree. I start at Swiggy next month!</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:var(--gold-light);color:var(--gold);">KN</div>
+        <div>
+          <div class="author-name">Kavya Nair</div>
+          <div class="author-role">Junior Developer · Chennai</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">TalentBridge<span class="dot">.</span></div>
+      <p class="footer-desc">India's most trusted job portal connecting ambitious professionals with companies that value talent.</p>
+    </div>
+    <div class="footer-col">
+      <h5>For Job Seekers</h5>
+      <ul>
+        <li><a href="#">Browse Jobs</a></li>
+        <li><a href="#">Build Resume</a></li>
+        <li><a href="#">Salary Calculator</a></li>
+        <li><a href="#">Career Advice</a></li>
+        <li><a href="#">Skill Assessments</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>For Employers</h5>
+      <ul>
+        <li><a href="#">Post a Job</a></li>
+        <li><a href="#">Search Talent</a></li>
+        <li><a href="#">HR Dashboard</a></li>
+        <li><a href="#">Pricing Plans</a></li>
+        <li><a href="#">Enterprise</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 TalentBridge. All rights reserved.</span>
+    <span>Made with care in India 🇮🇳</span>
+  </div>
+</footer>
+
+<script>
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Bookmark toggle
+  document.querySelectorAll('.bookmark-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const svg = this.querySelector('svg');
+      if (svg.style.fill === 'currentColor' || svg.getAttribute('fill') === 'currentColor') {
+        svg.style.fill = 'none';
+        this.style.color = '';
+      } else {
+        svg.style.fill = 'currentColor';
+        this.style.color = 'var(--accent)';
+      }
+    });
+  });
+
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 20) {
+      nav.style.boxShadow = '0 2px 20px rgba(15,14,12,0.10)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+</script>
+</body>
+</html>
